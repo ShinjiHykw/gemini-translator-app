@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini 双方向翻訳アプリ</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        h1, h2 { text-align: center; }
+        textarea { width: 100%; height: 120px; margin-bottom: 10px; padding: 10px; box-sizing: border-box; }
+        .translation-direction { margin-bottom: 15px; text-align: center; }
+        .translation-direction label { margin: 0 15px; cursor: pointer; }
+        input[type="submit"] { display: block; width: 100%; padding: 10px 20px; cursor: pointer; background-color: #4285F4; color: white; border: none; border-radius: 4px; font-size: 16px; }
+        .result-box { margin-top: 30px; padding: 15px; background-color: #f5f5f5; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Gemini 双方向翻訳アプリ</h1>
+    
+    <form action="/" method="post">
+        
+        <div class="translation-direction">
+            <label>
+                <input type="radio" name="direction" value="ja_to_zh" {{ 'checked' if direction == 'ja_to_zh' else '' }} checked> 日本語 → 台湾華語
+            </label>
+            <label>
+                <input type="radio" name="direction" value="zh_to_ja" {{ 'checked' if direction == 'zh_to_ja' else '' }}> 台湾華語 → 日本語
+            </label>
+        </div>
+
+        <textarea name="text_to_translate" placeholder="ここに翻訳したいテキストを入力...">{{ original_text }}</textarea>
+        <br>
+        <input type="submit" value="翻訳する">
+    </form>
+
+    {% if translated_text %}
+    <div class="result-box">
+        <h2>翻訳結果</h2>
+        <p style="font-size: 1.2em;">{{ translated_text }}</p>
+    </div>
+    {% endif %}
+
+</body>
+</html>
